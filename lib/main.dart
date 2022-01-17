@@ -8,6 +8,7 @@ import 'package:chatify_app/services/navigation_service.dart';
 
 //Pages
 import 'package:chatify_app/pages/splash_page.dart';
+import 'package:chatify_app/pages/login_page.dart';
 
 void main() {
   runApp(SplashPage(
@@ -32,7 +33,11 @@ class MainApp extends StatelessWidget {
           backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
         ),
       ),
-      // navigatorKey: NavigationService.navigationKey,
+      navigatorKey: NavigationService.navigationKey,
+      initialRoute: '/login',
+      routes: {
+        '/login': (BuildContext _context) => LoginPage(),
+      },
     );
   }
 }
