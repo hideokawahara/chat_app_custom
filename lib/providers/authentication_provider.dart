@@ -23,6 +23,7 @@ class AuthenticationProvider extends ChangeNotifier {
     try {
       await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
+      print(_auth.currentUser);
     } on FirebaseAuthException {
       print("Error logging user into Firebase");
     } catch (e) {
