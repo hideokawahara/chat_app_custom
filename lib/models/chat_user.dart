@@ -19,7 +19,7 @@ class ChatUser {
       name: _json["name"],
       email: _json["email"],
       imageURL: _json["image"],
-      lastActive: _json["last_active"],
+      lastActive: _json["last_active"].toDate(),
     );
   }
 

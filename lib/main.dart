@@ -13,6 +13,7 @@ import 'package:chatify_app/services/navigation_service.dart';
 //Pages
 import 'package:chatify_app/pages/splash_page.dart';
 import 'package:chatify_app/pages/login_page.dart';
+import 'package:chatify_app/pages/home_page.dart';
 
 void main() {
   runApp(SplashPage(
@@ -48,6 +49,7 @@ class MainApp extends StatelessWidget {
         initialRoute: '/login',
         routes: {
           '/login': (BuildContext _context) => LoginPage(),
+          '/home': (BuildContext _context) => HomePage(),
         },
       ),
     );
