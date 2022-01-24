@@ -26,6 +26,10 @@ class _RegisterPageState extends State<RegisterPage> {
   late double _deviceHeight;
   late double _deviceWidth;
 
+  late AuthenticationProvider _auth;
+  late DatabaseService _db;
+  late CloudStorageService _cloudStorageService;
+
   String? _email;
   String? _password;
   String? _name;
@@ -35,6 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    _auth = Provider.of<AuthenticationProvider>(context);
+    _db = GetIt.instance.get<DatabaseService>();
+    _cloudStorageService = GetIt.instance.get<CloudStorageService>();
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
 
@@ -158,7 +165,12 @@ class _RegisterPageState extends State<RegisterPage> {
       name: "Register",
       height: _deviceHeight * 0.065,
       width: _deviceWidth * 0.65,
-      onPressed: () async {},
+      onPressed: () async {
+        if (_registerFormKey.currentState!.validate() &&
+            _profileImage != null) {
+          //
+        }
+      },
     );
   }
 }
