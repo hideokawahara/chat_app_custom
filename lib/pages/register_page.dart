@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:chatify_app/services/media_service.dart';
 import 'package:chatify_app/services/database_service.dart';
 import 'package:chatify_app/services/cloud_storage_service.dart';
+import 'package:chatify_app/services/navigation_service.dart';
 
 //Widgets
 import 'package:chatify_app/widgets/custom_input_fields.dart';
@@ -28,7 +29,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   late AuthenticationProvider _auth;
   late DatabaseService _db;
-  late CloudStorageService _cloudStorageService;
+  late CloudStorageService _cloudStorage;
+  late NavigationService _navigation;
 
   String? _email;
   String? _password;
@@ -41,7 +43,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     _auth = Provider.of<AuthenticationProvider>(context);
     _db = GetIt.instance.get<DatabaseService>();
-    _cloudStorageService = GetIt.instance.get<CloudStorageService>();
+    _cloudStorage = GetIt.instance.get<CloudStorageService>();
+    _navigation = GetIt.instance.get<NavigationService>();
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
 
@@ -168,7 +171,15 @@ class _RegisterPageState extends State<RegisterPage> {
       onPressed: () async {
         if (_registerFormKey.currentState!.validate() &&
             _profileImage != null) {
-          //
+          _registerFormKey.currentState!.save();
+          String? _uid = await _auth.registerUserUsingEmailAndPassword(
+              _email!, _password!);
+          String? _imageURL =
+              await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
+          await _db.createUser(_uid, _email!, _name!, _imageURL!);
+          await _auth.logout();
+          // _navigation.goBack();
+          await _auth.loginUsingEmailAndPassword(_email!, _password!);
         }
       },
     );
