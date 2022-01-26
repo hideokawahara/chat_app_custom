@@ -6,6 +6,9 @@ import 'package:get_it/get_it.dart';
 //Providers
 import 'package:chatify_app/providers/authentication_provider.dart';
 
+//Widgets
+import 'package:chatify_app/widgets/top_bar.dart';
+
 class ChatsPage extends StatefulWidget {
   @override
   _ChatsPageState createState() => _ChatsPageState();
@@ -38,6 +41,25 @@ class _ChatsPageState extends State<ChatsPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TopBar(
+            'Chats',
+            primaryAction: IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Color.fromRGBO(
+                  0,
+                  82,
+                  218,
+                  1.0,
+                ),
+              ),
+              onPressed: () {
+                _auth.logout();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
