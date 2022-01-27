@@ -40,16 +40,16 @@ class ChatMessage {
   }
 
   Map<String, dynamic> toJson() {
-    MessageType _messageType;
-    switch (_json["type"]) {
-      case "text":
-        _messageType = MessageType.TEXT;
+    String _messageType;
+    switch (type) {
+      case MessageType.TEXT:
+        _messageType = "text";
         break;
-      case "image":
-        _messageType = MessageType.IMAGE;
+      case MessageType.IMAGE:
+        _messageType = "image";
         break;
       default:
-        _messageType = MessageType.UNKNOWN;
+        _messageType = "";
     }
     return {
       "content": content,
