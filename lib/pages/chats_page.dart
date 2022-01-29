@@ -60,17 +60,27 @@ class _ChatsPageState extends State<ChatsPage> {
               },
             ),
           ),
-          CustomListViewTileWithActivity(
-            height: _deviceHeight * 0.10,
-            title: "Tanaka",
-            subTitle: "whats up!",
-            imagePath: "https://i.pravatar.cc/300",
-            isActive: false,
-            isActivity: false,
-            onTap: () {},
-          ),
+          _chatsList(),
         ],
       ),
+    );
+  }
+
+  Widget _chatsList() {
+    return Expanded(
+      child: _chatTile(),
+    );
+  }
+
+  Widget _chatTile() {
+    return CustomListViewTileWithActivity(
+      height: _deviceHeight * 0.10,
+      title: "Tanaka",
+      subTitle: "whats up!",
+      imagePath: "https://i.pravatar.cc/300",
+      isActive: false,
+      isActivity: false,
+      onTap: () {},
     );
   }
 }
