@@ -11,6 +11,9 @@ import 'package:chatify_app/providers/chats_page_provider.dart';
 import 'package:chatify_app/widgets/top_bar.dart';
 import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
 
+//Models
+import 'package:chatify_app/models/chat.dart';
+
 class ChatsPage extends StatefulWidget {
   @override
   _ChatsPageState createState() => _ChatsPageState();
@@ -81,8 +84,33 @@ class _ChatsPageState extends State<ChatsPage> {
   }
 
   Widget _chatsList() {
+    List<Chat>? _chats = _pageProvider.chats;
+
     return Expanded(
-      child: _chatTile(),
+      child: (() {
+        if (_chats != null) {
+          if (_chats.length != 0) {
+            return ListView.builder(
+                itemCount: _chats.length,
+                itemBuilder: (BuildContext _context, int _index) {
+                  return _chatTile();
+                });
+          } else {
+            return Center(
+              child: Text(
+                "No Chats Found",
+                style: TextStyle(color: Colors.white),
+              ),
+            );
+          }
+        } else {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          );
+        }
+      })(),
     );
   }
 
