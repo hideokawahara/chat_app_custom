@@ -33,8 +33,6 @@ class Chat {
   }
 
   String imageURL() {
-    return !group
-        ? _recipients.first.imageURL
-        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSXwm30uVvhY-yUBRRlUzr6DvMxuYCPdxL3A&usqp=CAU";
+    return !group ? _recipients.first.imageURL : "https://i.pravatar.cc/300";
   }
 }

@@ -13,6 +13,8 @@ import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
 
 //Models
 import 'package:chatify_app/models/chat.dart';
+import 'package:chatify_app/models/chat_user.dart';
+import 'package:chatify_app/models/chat_message.dart';
 
 class ChatsPage extends StatefulWidget {
   @override
@@ -93,7 +95,9 @@ class _ChatsPageState extends State<ChatsPage> {
             return ListView.builder(
                 itemCount: _chats.length,
                 itemBuilder: (BuildContext _context, int _index) {
-                  return _chatTile();
+                  return _chatTile(
+                    _chats[_index],
+                  );
                 });
           } else {
             return Center(
@@ -114,14 +118,22 @@ class _ChatsPageState extends State<ChatsPage> {
     );
   }
 
-  Widget _chatTile() {
+  Widget _chatTile(Chat _chat) {
+    List<ChatUser> _recipients = _chat.recipients();
+    bool _isActive = _recipients.any((_d) => _d.wasRecentlyActive());
+    String _subtitleText = "";
+    if (_chat.messages.isNotEmpty) {
+      _subtitleText = _chat.messages.first.type != MessageType.TEXT
+          ? "画像表示"
+          : _chat.messages.first.content;
+    }
     return CustomListViewTileWithActivity(
       height: _deviceHeight * 0.10,
-      title: "Tanaka",
-      subTitle: "whats up!",
-      imagePath: "https://i.pravatar.cc/300",
-      isActive: false,
-      isActivity: false,
+      title: _chat.title(),
+      subTitle: _subtitleText,
+      imagePath: _chat.imageURL(),
+      isActive: _isActive,
+      isActivity: _chat.activity,
       onTap: () {},
     );
   }
