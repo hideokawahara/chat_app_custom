@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 
 //Providers
 import 'package:chatify_app/providers/authentication_provider.dart';
+import 'package:chatify_app/providers/chats_page_provider.dart';
 
 //Widgets
 import 'package:chatify_app/widgets/top_bar.dart';
@@ -20,6 +21,7 @@ class _ChatsPageState extends State<ChatsPage> {
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
+  late ChatsPageProvider _pageProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -27,43 +29,55 @@ class _ChatsPageState extends State<ChatsPage> {
     _deviceWidth = MediaQuery.of(context).size.width;
     _auth = Provider.of<AuthenticationProvider>(context);
 
-    return _buildUI();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ChatsPageProvider>(
+          create: (_) => ChatsPageProvider(
+            _auth,
+          ),
+        ),
+      ],
+      child: _buildUI(),
+    );
   }
 
   Widget _buildUI() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: _deviceWidth * 0.03,
-        vertical: _deviceHeight * 0.02,
-      ),
-      height: _deviceHeight * 0.98,
-      width: _deviceWidth * 0.97,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TopBar(
-            'Chats',
-            primaryAction: IconButton(
-              icon: Icon(
-                Icons.logout,
-                color: Color.fromRGBO(
-                  0,
-                  82,
-                  218,
-                  1.0,
+    return Builder(builder: (BuildContext _context) {
+      _pageProvider = _context.watch<ChatsPageProvider>();
+      return Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: _deviceWidth * 0.03,
+          vertical: _deviceHeight * 0.02,
+        ),
+        height: _deviceHeight * 0.98,
+        width: _deviceWidth * 0.97,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TopBar(
+              'Chats',
+              primaryAction: IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Color.fromRGBO(
+                    0,
+                    82,
+                    218,
+                    1.0,
+                  ),
                 ),
+                onPressed: () {
+                  _auth.logout();
+                },
               ),
-              onPressed: () {
-                _auth.logout();
-              },
             ),
-          ),
-          _chatsList(),
-        ],
-      ),
-    );
+            _chatsList(),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _chatsList() {
