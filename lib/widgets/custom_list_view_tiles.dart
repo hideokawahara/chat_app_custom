@@ -47,6 +47,26 @@ class CustomListViewTileWithActivity extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
+      subtitle: isActivity
+          ? Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SpinKitThreeBounce(
+                  color: Colors.white54,
+                  size: height * 0.10,
+                ),
+              ],
+            )
+          : Text(
+              subTitle,
+              style: TextStyle(
+                color: Colors.white54,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
     );
   }
 }
