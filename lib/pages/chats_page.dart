@@ -8,6 +8,7 @@ import 'package:chatify_app/providers/authentication_provider.dart';
 
 //Widgets
 import 'package:chatify_app/widgets/top_bar.dart';
+import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
 
 class ChatsPage extends StatefulWidget {
   @override
@@ -58,6 +59,15 @@ class _ChatsPageState extends State<ChatsPage> {
                 _auth.logout();
               },
             ),
+          ),
+          CustomListViewTileWithActivity(
+            height: _deviceHeight * 0.10,
+            title: "Tanaka",
+            subTitle: "whats up!",
+            imagePath: "https://i.pravatar.cc/300",
+            isActive: false,
+            isActivity: false,
+            onTap: () {},
           ),
         ],
       ),
