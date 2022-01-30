@@ -7,6 +7,12 @@ import 'package:get_it/get_it.dart';
 import 'package:chatify_app/providers/authentication_provider.dart';
 import 'package:chatify_app/providers/chats_page_provider.dart';
 
+//Services
+import 'package:chatify_app/services/navigation_service.dart';
+
+//Pages
+import 'package:chatify_app/pages/chat_page.dart';
+
 //Widgets
 import 'package:chatify_app/widgets/top_bar.dart';
 import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
@@ -26,6 +32,7 @@ class _ChatsPageState extends State<ChatsPage> {
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
+  late NavigationService _navigation;
   late ChatsPageProvider _pageProvider;
 
   @override
@@ -33,6 +40,7 @@ class _ChatsPageState extends State<ChatsPage> {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     _auth = Provider.of<AuthenticationProvider>(context);
+    _navigation = GetIt.instance.get<NavigationService>();
 
     return MultiProvider(
       providers: [
@@ -134,7 +142,11 @@ class _ChatsPageState extends State<ChatsPage> {
       imagePath: _chat.imageURL(),
       isActive: _isActive,
       isActivity: _chat.activity,
-      onTap: () {},
+      onTap: () {
+        _navigation.navigateToPage(
+          ChatPage(chat: _chat),
+        );
+      },
     );
   }
 }
