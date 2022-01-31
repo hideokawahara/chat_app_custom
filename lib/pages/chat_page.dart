@@ -106,12 +106,49 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                     onPressed: () {},
                   ),
-                )
+                ),
+                _messagesListView(),
               ],
             ),
           ),
         ),
       );
     });
+  }
+
+  Widget _messagesListView() {
+    if (_pageProvider.messages != null) {
+      if (_pageProvider.messages!.length != 0) {
+        return Container(
+          height: _deviceHeight * 0.74,
+          child: ListView.builder(
+              itemCount: _pageProvider.messages!.length,
+              itemBuilder: (BuildContext _context, int _index) {
+                return Container(
+                  child: Text(
+                    _pageProvider.messages![_index].content,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              }),
+        );
+      } else {
+        return Align(
+          alignment: Alignment.center,
+          child: Text(
+            "挨拶しよう",
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      }
+    } else {
+      return Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
+      );
+    }
   }
 }
