@@ -63,7 +63,7 @@ class ChatsPageProvider extends ChangeNotifier {
               if (_chatMessage.docs.isNotEmpty) {
                 Map<String, dynamic> _messageData =
                     _chatMessage.docs.first.data()! as Map<String, dynamic>;
-                ChatMessage _message = ChatMessage.from(_messageData);
+                ChatMessage _message = ChatMessage.fromJSON(_messageData);
                 _messages.add(_message);
               }
 
