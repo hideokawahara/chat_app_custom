@@ -126,11 +126,6 @@ class _ChatPageState extends State<ChatPage> {
               itemBuilder: (BuildContext _context, int _index) {
                 ChatMessage _message = _pageProvider.messages![_index];
                 bool _isOwnMessage = _message.senderID == _auth.user.uid;
-                widget.chat.members.forEach(
-                    (element) => print("${element.uid}, ${element.name}"));
-                print(_message.senderID);
-                print(widget.chat.members
-                    .where((_m) => _m.uid == _message.senderID));
                 return Container(
                   child: CustomChatListViewTile(
                     width: _deviceWidth * 0.80,
