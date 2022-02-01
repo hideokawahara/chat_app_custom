@@ -124,12 +124,22 @@ class _ChatPageState extends State<ChatPage> {
           child: ListView.builder(
               itemCount: _pageProvider.messages!.length,
               itemBuilder: (BuildContext _context, int _index) {
+                ChatMessage _message = _pageProvider.messages![_index];
+                bool _isOwnMessage = _message.senderID == _auth.user.uid;
+                widget.chat.members.forEach(
+                    (element) => print("${element.uid}, ${element.name}"));
+                print(_message.senderID);
+                print(widget.chat.members
+                    .where((_m) => _m.uid == _message.senderID));
                 return Container(
-                  child: Text(
-                    _pageProvider.messages![_index].content,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                  child: CustomChatListViewTile(
+                    width: _deviceWidth * 0.80,
+                    deviceHeight: _deviceHeight,
+                    isOwnMessage: _isOwnMessage,
+                    message: _message,
+                    sender: widget.chat.members
+                        .where((_m) => _m.uid == _message.senderID)
+                        .first,
                   ),
                 );
               }),
