@@ -53,16 +53,24 @@ class _UsersPageState extends State<UsersPage> {
           TopBar(
             'ユーザー',
             primaryAction: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.logout,
-                  color: Color.fromRGBO(
-                    0,
-                    82,
-                    218,
-                    1.0,
-                  ),
-                )),
+              onPressed: () {},
+              icon: Icon(
+                Icons.logout,
+                color: Color.fromRGBO(
+                  0,
+                  82,
+                  218,
+                  1.0,
+                ),
+              ),
+            ),
+          ),
+          CustomTextField(
+            onEditingComplete: (_value) {},
+            hintText: "ユーザーを探す",
+            obscureText: false,
+            controller: _searchFieldTextEditingController,
+            icon: Icons.search,
           ),
         ],
       ),
