@@ -92,7 +92,9 @@ class _ChatPageState extends State<ChatPage> {
                         1.0,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _pageProvider.deleteChat();
+                    },
                   ),
                   secondaryAction: IconButton(
                     icon: Icon(
@@ -104,7 +106,9 @@ class _ChatPageState extends State<ChatPage> {
                         1.0,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _pageProvider.goBack();
+                    },
                   ),
                 ),
                 _messagesListView(),
