@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 //Pages
-import 'package:chatify_app/pages/chats_page.dart';
-import 'package:chatify_app/pages/users_page.dart';
+import 'package:chat_app_custom/pages/chats_page.dart';
+import 'package:chat_app_custom/pages/users_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -2,7 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //Models
-import 'package:chatify_app/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
 
 const String USER_COLLECTION = "Users";
 const String CHAT_COLLECTION = "Chats";

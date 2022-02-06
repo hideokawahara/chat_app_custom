@@ -4,18 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 
 //Services
-import 'package:chatify_app/services/database_service.dart';
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/database_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
 
 //Models
-import 'package:chatify_app/models/chat_user.dart';
-import 'package:chatify_app/models/chat.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat.dart';
 
 //Pages
-import 'package:chatify_app/pages/chat_page.dart';
+import 'package:chat_app_custom/pages/chat_page.dart';
 
 class UsersPageProvider extends ChangeNotifier {
   AuthenticationProvider _auth;
