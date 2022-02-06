@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Widgets
 import 'package:chat_app_custom/widgets/rounded_image.dart';
 import 'package:chat_app_custom/widgets/message_bubbles.dart';
@@ -32,7 +35,7 @@ class CustomListViewTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: isSelected ? Icon(Icons.check, color: Colors.white) : null,
+      trailing: isSelected ? Icon(Icons.check, color: AppColors.white) : null,
       onTap: () => onTap(),
       minVerticalPadding: height * 0.20,
       leading: RoundedImageNetworkWithStatusIndicator(
@@ -44,7 +47,7 @@ class CustomListViewTile extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.white,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
@@ -52,7 +55,7 @@ class CustomListViewTile extends StatelessWidget {
       subtitle: Text(
         subTitle,
         style: TextStyle(
-          color: Colors.white54,
+          color: AppColors.listSubTitleGrey,
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
@@ -94,7 +97,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.white,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
@@ -106,7 +109,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SpinKitThreeBounce(
-                  color: Colors.white54,
+                  color: AppColors.listSubTitleGrey,
                   size: height * 0.10,
                 ),
               ],
@@ -114,7 +117,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
           : Text(
               subTitle,
               style: TextStyle(
-                color: Colors.white54,
+                color: AppColors.listSubTitleGrey,
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),

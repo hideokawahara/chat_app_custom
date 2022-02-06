@@ -1,4 +1,8 @@
+//Package
 import 'package:flutter/material.dart';
+
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
 
 class RoundedButton extends StatelessWidget {
   final String name;
@@ -20,7 +24,7 @@ class RoundedButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(height * 0.25),
-        color: Color.fromRGBO(0, 82, 218, 1.0),
+        color: AppColors.mainColorTeal,
       ),
       child: TextButton(
         onPressed: () => onPressed(),
@@ -28,7 +32,7 @@ class RoundedButton extends StatelessWidget {
           name,
           style: TextStyle(
             fontSize: 22,
-            color: Colors.white,
+            color: AppColors.white,
             height: 1.5,
           ),
         ),

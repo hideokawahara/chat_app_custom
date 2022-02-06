@@ -7,6 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:chat_app_custom/providers/authentication_provider.dart';
 import 'package:chat_app_custom/providers/users_page_provider.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Widgets
 import 'package:chat_app_custom/widgets/top_bar.dart';
 import 'package:chat_app_custom/widgets/custom_input_fields.dart';
@@ -69,12 +72,7 @@ class _UsersPageState extends State<UsersPage> {
                 },
                 icon: Icon(
                   Icons.logout,
-                  color: Color.fromRGBO(
-                    0,
-                    82,
-                    218,
-                    1.0,
-                  ),
+                  color: AppColors.white,
                 ),
               ),
             ),
@@ -125,7 +123,7 @@ class _UsersPageState extends State<UsersPage> {
             child: Text(
               "そんな人はいません",
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
           );
@@ -133,7 +131,7 @@ class _UsersPageState extends State<UsersPage> {
       } else {
         return Center(
           child: CircularProgressIndicator(
-            color: Colors.white,
+            color: AppColors.white,
           ),
         );
       }

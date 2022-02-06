@@ -7,6 +7,9 @@ import 'package:get_it/get_it.dart';
 import 'package:chat_app_custom/providers/authentication_provider.dart';
 import 'package:chat_app_custom/providers/chats_page_provider.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Services
 import 'package:chat_app_custom/services/navigation_service.dart';
 
@@ -74,12 +77,7 @@ class _ChatsPageState extends State<ChatsPage> {
               primaryAction: IconButton(
                 icon: Icon(
                   Icons.logout,
-                  color: Color.fromRGBO(
-                    0,
-                    82,
-                    218,
-                    1.0,
-                  ),
+                  color: AppColors.white,
                 ),
                 onPressed: () {
                   _auth.logout();
@@ -111,14 +109,16 @@ class _ChatsPageState extends State<ChatsPage> {
             return Center(
               child: Text(
                 "No Chats Found",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: AppColors.white,
+                ),
               ),
             );
           }
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Colors.white,
+              color: AppColors.white,
             ),
           );
         }
