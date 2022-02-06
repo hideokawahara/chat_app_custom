@@ -98,7 +98,7 @@ class UsersPageProvider extends ChangeNotifier {
           ),
         );
       }
-      ChatPage _chatpage = ChatPage(
+      ChatPage _chatPage = ChatPage(
         chat: Chat(
           uid: _doc!.id,
           currentUserUid: _auth.user.uid,
@@ -108,7 +108,7 @@ class UsersPageProvider extends ChangeNotifier {
           group: _isGroup,
         ),
       );
-      _navigation.navigateToPage(_chatpage);
+      _navigation.navigateToPage(_chatPage);
     } catch (e) {
       print("error creating chat");
       print(e);
