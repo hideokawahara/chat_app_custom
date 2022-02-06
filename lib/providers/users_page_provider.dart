@@ -108,6 +108,8 @@ class UsersPageProvider extends ChangeNotifier {
           group: _isGroup,
         ),
       );
+      _selectedUsers = [];
+      notifyListeners();
       _navigation.navigateToPage(_chatPage);
     } catch (e) {
       print("error creating chat");
