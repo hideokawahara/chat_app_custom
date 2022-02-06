@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 //Models
-import 'package:chatify_app/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
 
 class TextMessageBubble extends StatelessWidget {
   final bool isOwnMessage;

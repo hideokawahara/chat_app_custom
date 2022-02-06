@@ -1,4 +1,4 @@
-# chatify_app
+# chat_app_custom
 
 A new Flutter project.
 

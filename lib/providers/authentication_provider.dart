@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
 //Services
-import 'package:chatify_app/services/database_service.dart';
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/database_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 //Models
-import 'package:chatify_app/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   late final FirebaseAuth _auth;
