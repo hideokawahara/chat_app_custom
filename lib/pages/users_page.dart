@@ -91,20 +91,40 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   Widget _usersList() {
+    List<ChatUser>? _users = _pageProvider.users;
     return Expanded(child: () {
-      return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (BuildContext _context, int _index) {
-            return CustomListViewTile(
-              height: _deviceHeight * 0.10,
-              title: "User $_index",
-              subTitle: "Last Active: ",
-              imagePath: "https://i.pravatar.cc/300",
-              isActive: false,
-              isSelected: false,
-              onTap: () {},
-            );
-          });
+      if (_users != null) {
+        if (_users.length != 0) {
+          return ListView.builder(
+              itemCount: _users.length,
+              itemBuilder: (BuildContext _context, int _index) {
+                return CustomListViewTile(
+                  height: _deviceHeight * 0.10,
+                  title: _users[_index].name,
+                  subTitle: "Last Active: ${_users[_index].lastDayActive()}",
+                  imagePath: _users[_index].imageURL,
+                  isActive: _users[_index].wasRecentlyActive(),
+                  isSelected: false,
+                  onTap: () {},
+                );
+              });
+        } else {
+          return Center(
+            child: Text(
+              "そんな人はいません",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          );
+        }
+      } else {
+        return Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        );
+      }
     }());
   }
 }

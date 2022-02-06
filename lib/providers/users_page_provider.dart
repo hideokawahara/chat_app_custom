@@ -34,10 +34,32 @@ class UsersPageProvider extends ChangeNotifier {
     _selectedUsers = [];
     _database = GetIt.instance.get<DatabaseService>();
     _navigation = GetIt.instance.get<NavigationService>();
+    getUsers();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void getUsers({String? name}) async {
+    _selectedUsers = [];
+    try {
+      _database.getUsers(name: name).then(
+        (_snapshot) {
+          users = _snapshot.docs.map(
+            (_doc) {
+              Map<String, dynamic> _data = _doc.data() as Map<String, dynamic>;
+              _data["uid"] = _doc.id;
+              return ChatUser.fromJSON(_data);
+            },
+          ).toList();
+          notifyListeners();
+        },
+      );
+    } catch (e) {
+      print("error getting users");
+      print(e);
+    }
   }
 }
