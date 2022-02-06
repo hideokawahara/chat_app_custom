@@ -84,6 +84,7 @@ class _UsersPageState extends State<UsersPage> {
               icon: Icons.search,
             ),
             _usersList(),
+            _createChatButton(),
           ],
         ),
       );
@@ -132,5 +133,21 @@ class _UsersPageState extends State<UsersPage> {
         );
       }
     }());
+  }
+
+  Widget _createChatButton() {
+    return Visibility(
+      visible: _pageProvider.selectedUsers.isNotEmpty,
+      child: RoundedButton(
+        name: _pageProvider.selectedUsers.length == 1
+            ? "${_pageProvider.selectedUsers.first.name}と話す"
+            : "グループを作成する",
+        height: _deviceHeight * 0.08,
+        width: _deviceWidth * 0.80,
+        onPressed: () {
+          _pageProvider.createChat();
+        },
+      ),
+    );
   }
 }
