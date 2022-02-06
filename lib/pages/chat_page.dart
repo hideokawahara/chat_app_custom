@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Widgets
 import 'package:chat_app_custom/widgets/top_bar.dart';
 import 'package:chat_app_custom/widgets/custom_list_view_tiles.dart';
@@ -85,12 +88,7 @@ class _ChatPageState extends State<ChatPage> {
                   primaryAction: IconButton(
                     icon: Icon(
                       Icons.delete,
-                      color: Color.fromRGBO(
-                        0,
-                        82,
-                        218,
-                        1.0,
-                      ),
+                      color: AppColors.white,
                     ),
                     onPressed: () {
                       _pageProvider.deleteChat();
@@ -99,12 +97,7 @@ class _ChatPageState extends State<ChatPage> {
                   secondaryAction: IconButton(
                     icon: Icon(
                       Icons.arrow_back,
-                      color: Color.fromRGBO(
-                        0,
-                        82,
-                        218,
-                        1.0,
-                      ),
+                      color: AppColors.white,
                     ),
                     onPressed: () {
                       _pageProvider.goBack();
@@ -150,14 +143,14 @@ class _ChatPageState extends State<ChatPage> {
           alignment: Alignment.center,
           child: Text(
             "挨拶しよう",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppColors.white),
           ),
         );
       }
     } else {
       return Center(
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: AppColors.white,
         ),
       );
     }
@@ -167,7 +160,7 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       height: _deviceHeight * 0.06,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(30, 29, 37, 1.0),
+        color: AppColors.mainColorTeal,
         borderRadius: BorderRadius.circular(100),
       ),
       margin: EdgeInsets.symmetric(
@@ -212,7 +205,7 @@ class _ChatPageState extends State<ChatPage> {
       child: IconButton(
         icon: Icon(
           Icons.send,
-          color: Colors.white,
+          color: AppColors.white,
         ),
         onPressed: () {
           if (_messageFormState.currentState!.validate()) {
@@ -231,7 +224,7 @@ class _ChatPageState extends State<ChatPage> {
       height: _size,
       width: _size,
       child: FloatingActionButton(
-        backgroundColor: Color.fromRGBO(0, 82, 218, 1.0),
+        backgroundColor: AppColors.messageSendImageButtonColor,
         onPressed: () {
           _pageProvider.sendImageMessage();
         },

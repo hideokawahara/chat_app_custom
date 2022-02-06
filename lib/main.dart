@@ -7,6 +7,9 @@ import 'package:provider/provider.dart';
 //Providers
 import 'package:chat_app_custom/providers/authentication_provider.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Services
 import 'package:chat_app_custom/services/navigation_service.dart';
 
@@ -40,10 +43,10 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Chatify',
         theme: ThemeData(
-          backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
-          scaffoldBackgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+          // backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
+          scaffoldBackgroundColor: AppColors.mainScaffoldBackGroundColor,
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            backgroundColor: Color.fromRGBO(30, 29, 37, 1.0),
+            backgroundColor: AppColors.mainColorTeal,
           ),
         ),
         navigatorKey: NavigationService.navigationKey,
