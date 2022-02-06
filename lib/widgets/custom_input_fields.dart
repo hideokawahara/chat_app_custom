@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 class CustomTextFormField extends StatelessWidget {
   final Function(String) onSaved;
   final String regEx;
@@ -17,21 +20,21 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onSaved: (_value) => onSaved(_value!),
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
+      cursorColor: AppColors.white,
+      style: TextStyle(color: AppColors.white),
       obscureText: obsucureText,
       validator: (_value) {
         return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
       },
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(30, 29, 37, 1.0),
+        fillColor: AppColors.mainColorTeal,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.white54),
+        hintStyle: TextStyle(color: AppColors.hintTextGrey),
       ),
     );
   }
@@ -57,21 +60,21 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       onEditingComplete: () => onEditingComplete(controller.value.text),
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
+      cursorColor: AppColors.white,
+      style: TextStyle(color: AppColors.white),
       obscureText: obscureText,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(30, 29, 37, 1.0),
+        fillColor: AppColors.mainColorTeal,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.white54),
+        hintStyle: TextStyle(color: AppColors.hintTextGrey),
         prefixIcon: Icon(
           icon,
-          color: Colors.white54,
+          color: AppColors.hintTextGrey,
         ),
       ),
     );

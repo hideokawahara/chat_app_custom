@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 //Packages
 import 'package:timeago/timeago.dart' as timeago;
 
+//Resource
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 //Models
 import 'package:chat_app_custom/models/chat_message.dart';
 
@@ -22,8 +25,8 @@ class TextMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Color> _colorScheme = isOwnMessage
-        ? [Color.fromRGBO(0, 136, 249, 1.0), Color.fromRGBO(0, 82, 218, 1.0)]
-        : [Color.fromRGBO(51, 49, 68, 1.0), Color.fromRGBO(51, 49, 68, 1.0)];
+        ? AppColors.messageBubbleOwnColor
+        : AppColors.messageBubbleOpponentColor;
     return Container(
       height: height + (message.content.length / 20 * 6.0),
       width: width,
@@ -45,13 +48,13 @@ class TextMessageBubble extends StatelessWidget {
           Text(
             message.content,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ),
           Text(
             timeago.format(message.sentTime),
             style: TextStyle(
-              color: Colors.white70,
+              color: AppColors.sentMessageTimeGrey,
             ),
           )
         ],
@@ -76,8 +79,8 @@ class ImageMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Color> _colorScheme = isOwnMessage
-        ? [Color.fromRGBO(0, 136, 249, 1.0), Color.fromRGBO(0, 82, 218, 1.0)]
-        : [Color.fromRGBO(51, 49, 68, 1.0), Color.fromRGBO(51, 49, 68, 1.0)];
+        ? AppColors.messageBubbleOwnColor
+        : AppColors.messageBubbleOpponentColor;
     DecorationImage _image = DecorationImage(
         image: NetworkImage(message.content), fit: BoxFit.cover);
     return Container(
@@ -113,7 +116,7 @@ class ImageMessageBubble extends StatelessWidget {
           Text(
             timeago.format(message.sentTime),
             style: TextStyle(
-              color: Colors.white70,
+              color: AppColors.sentMessageTimeGrey,
             ),
           )
         ],

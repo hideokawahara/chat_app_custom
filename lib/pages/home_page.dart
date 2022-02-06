@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:chat_app_custom/pages/chats_page.dart';
 import 'package:chat_app_custom/pages/users_page.dart';
 
+//Resources
+import 'package:chat_app_custom/resource/app_colors.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -26,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _pages[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: AppColors.white,
+        unselectedItemColor: AppColors.unSelectedGrey,
         currentIndex: _currentPage,
         onTap: (_index) {
           setState(() {
