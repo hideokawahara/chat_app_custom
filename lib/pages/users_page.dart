@@ -64,7 +64,9 @@ class _UsersPageState extends State<UsersPage> {
             TopBar(
               'ユーザー',
               primaryAction: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  _auth.logout();
+                },
                 icon: Icon(
                   Icons.logout,
                   color: Color.fromRGBO(
@@ -77,7 +79,10 @@ class _UsersPageState extends State<UsersPage> {
               ),
             ),
             CustomTextField(
-              onEditingComplete: (_value) {},
+              onEditingComplete: (_value) {
+                _pageProvider.getUsers(name: _value);
+                FocusScope.of(context).unfocus();
+              },
               hintText: "ユーザーを探す",
               obscureText: false,
               controller: _searchFieldTextEditingController,
