@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:734099628044:android:2ad674db01433d9f4a4e29",
         "android_client_info": {
-          "package_name": "com.example.chatify_app"
+          "package_name": "com.example.chat_app_custom"
         }
       },
       "oauth_client": [

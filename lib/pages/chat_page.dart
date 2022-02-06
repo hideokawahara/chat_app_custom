@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Widgets
-import 'package:chatify_app/widgets/top_bar.dart';
-import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
-import 'package:chatify_app/widgets/custom_input_fields.dart';
+import 'package:chat_app_custom/widgets/top_bar.dart';
+import 'package:chat_app_custom/widgets/custom_list_view_tiles.dart';
+import 'package:chat_app_custom/widgets/custom_input_fields.dart';
 
 //Models
-import 'package:chatify_app/models/chat.dart';
-import 'package:chatify_app/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
-import 'package:chatify_app/providers/chat_page_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/chat_page_provider.dart';
 
 class ChatPage extends StatefulWidget {
   final Chat chat;

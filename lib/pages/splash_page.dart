@@ -5,10 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 
 //Services
-import 'package:chatify_app/services/navigation_service.dart';
-import 'package:chatify_app/services/media_service.dart';
-import 'package:chatify_app/services/cloud_storage_service.dart';
-import 'package:chatify_app/services/database_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
+import 'package:chat_app_custom/services/media_service.dart';
+import 'package:chat_app_custom/services/cloud_storage_service.dart';
+import 'package:chat_app_custom/services/database_service.dart';
 
 class SplashPage extends StatefulWidget {
   final VoidCallback onInitializationComplete;

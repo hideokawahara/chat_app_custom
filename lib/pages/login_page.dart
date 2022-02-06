@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 
 //WIdgets
-import 'package:chatify_app/widgets/custom_input_fields.dart';
-import 'package:chatify_app/widgets/rounded_button.dart';
+import 'package:chat_app_custom/widgets/custom_input_fields.dart';
+import 'package:chat_app_custom/widgets/rounded_button.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
 
 //Services
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 class LoginPage extends StatefulWidget {
   @override

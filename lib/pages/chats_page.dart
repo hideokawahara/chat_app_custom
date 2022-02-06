@@ -4,23 +4,23 @@ import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
-import 'package:chatify_app/providers/chats_page_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/chats_page_provider.dart';
 
 //Services
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 //Pages
-import 'package:chatify_app/pages/chat_page.dart';
+import 'package:chat_app_custom/pages/chat_page.dart';
 
 //Widgets
-import 'package:chatify_app/widgets/top_bar.dart';
-import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
+import 'package:chat_app_custom/widgets/top_bar.dart';
+import 'package:chat_app_custom/widgets/custom_list_view_tiles.dart';
 
 //Models
-import 'package:chatify_app/models/chat.dart';
-import 'package:chatify_app/models/chat_user.dart';
-import 'package:chatify_app/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
 
 class ChatsPage extends StatefulWidget {
   @override

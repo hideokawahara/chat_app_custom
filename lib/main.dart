@@ -5,16 +5,16 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
 
 //Services
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 //Pages
-import 'package:chatify_app/pages/splash_page.dart';
-import 'package:chatify_app/pages/login_page.dart';
-import 'package:chatify_app/pages/register_page.dart';
-import 'package:chatify_app/pages/home_page.dart';
+import 'package:chat_app_custom/pages/splash_page.dart';
+import 'package:chat_app_custom/pages/login_page.dart';
+import 'package:chat_app_custom/pages/register_page.dart';
+import 'package:chat_app_custom/pages/home_page.dart';
 
 void main() {
   runApp(SplashPage(

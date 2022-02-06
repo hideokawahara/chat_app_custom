@@ -5,18 +5,18 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 //Services
-import 'package:chatify_app/services/media_service.dart';
-import 'package:chatify_app/services/database_service.dart';
-import 'package:chatify_app/services/cloud_storage_service.dart';
-import 'package:chatify_app/services/navigation_service.dart';
+import 'package:chat_app_custom/services/media_service.dart';
+import 'package:chat_app_custom/services/database_service.dart';
+import 'package:chat_app_custom/services/cloud_storage_service.dart';
+import 'package:chat_app_custom/services/navigation_service.dart';
 
 //Widgets
-import 'package:chatify_app/widgets/custom_input_fields.dart';
-import 'package:chatify_app/widgets/rounded_button.dart';
-import 'package:chatify_app/widgets/rounded_image.dart';
+import 'package:chat_app_custom/widgets/custom_input_fields.dart';
+import 'package:chat_app_custom/widgets/rounded_button.dart';
+import 'package:chat_app_custom/widgets/rounded_image.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

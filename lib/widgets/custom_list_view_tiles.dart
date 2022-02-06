@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 //Widgets
-import 'package:chatify_app/widgets/rounded_image.dart';
-import 'package:chatify_app/widgets/message_bubbles.dart';
+import 'package:chat_app_custom/widgets/rounded_image.dart';
+import 'package:chat_app_custom/widgets/message_bubbles.dart';
 
 //Models
-import 'package:chatify_app/models/chat_message.dart';
-import 'package:chatify_app/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
 
 class CustomListViewTile extends StatelessWidget {
   final double height;

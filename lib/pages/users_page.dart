@@ -4,17 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 
 //Providers
-import 'package:chatify_app/providers/authentication_provider.dart';
-import 'package:chatify_app/providers/users_page_provider.dart';
+import 'package:chat_app_custom/providers/authentication_provider.dart';
+import 'package:chat_app_custom/providers/users_page_provider.dart';
 
 //Widgets
-import 'package:chatify_app/widgets/top_bar.dart';
-import 'package:chatify_app/widgets/custom_input_fields.dart';
-import 'package:chatify_app/widgets/custom_list_view_tiles.dart';
-import 'package:chatify_app/widgets/rounded_button.dart';
+import 'package:chat_app_custom/widgets/top_bar.dart';
+import 'package:chat_app_custom/widgets/custom_input_fields.dart';
+import 'package:chat_app_custom/widgets/custom_list_view_tiles.dart';
+import 'package:chat_app_custom/widgets/rounded_button.dart';
 
 //Models
-import 'package:chatify_app/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
 
 class UsersPage extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
-import 'package:chatify_app/models/chat_user.dart';
-import 'package:chatify_app/models/chat_message.dart';
+import 'package:chat_app_custom/models/chat_user.dart';
+import 'package:chat_app_custom/models/chat_message.dart';
 
 class Chat {
   final String uid;
