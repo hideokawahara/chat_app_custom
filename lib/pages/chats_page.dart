@@ -9,6 +9,7 @@ import 'package:chat_app_custom/providers/chats_page_provider.dart';
 
 //Resource
 import 'package:chat_app_custom/resource/app_colors.dart';
+import 'package:chat_app_custom/resource/app_strings.dart';
 
 //Services
 import 'package:chat_app_custom/services/navigation_service.dart';
@@ -73,7 +74,7 @@ class _ChatsPageState extends State<ChatsPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TopBar(
-              'Chats',
+              AppStrings.chatsPageTitle,
               primaryAction: IconButton(
                 icon: Icon(
                   Icons.logout,
@@ -108,7 +109,7 @@ class _ChatsPageState extends State<ChatsPage> {
           } else {
             return Center(
               child: Text(
-                "No Chats Found",
+                AppStrings.emptyChatsText,
                 style: TextStyle(
                   color: AppColors.white,
                 ),
@@ -129,10 +130,10 @@ class _ChatsPageState extends State<ChatsPage> {
   Widget _chatTile(Chat _chat) {
     List<ChatUser> _recipients = _chat.recipients();
     bool _isActive = _recipients.any((_d) => _d.wasRecentlyActive());
-    String _subtitleText = "";
+    String _subtitleText = AppStrings.isEmptyText;
     if (_chat.messages.isNotEmpty) {
       _subtitleText = _chat.messages.first.type != MessageType.TEXT
-          ? "画像表示"
+          ? AppStrings.imageSentText
           : _chat.messages.first.content;
     }
     return CustomListViewTileWithActivity(
