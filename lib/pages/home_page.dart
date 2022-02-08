@@ -7,6 +7,7 @@ import 'package:chat_app_custom/pages/users_page.dart';
 
 //Resources
 import 'package:chat_app_custom/resource/app_colors.dart';
+import 'package:chat_app_custom/resource/app_strings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,13 +40,13 @@ class _HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            label: "Chats",
+            label: AppStrings.navigationTitleChats,
             icon: Icon(
               Icons.chat_bubble_sharp,
             ),
           ),
           BottomNavigationBarItem(
-            label: "Users",
+            label: AppStrings.navigationTitleUsers,
             icon: Icon(
               Icons.supervised_user_circle_sharp,
             ),
