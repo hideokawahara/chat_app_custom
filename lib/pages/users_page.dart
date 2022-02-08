@@ -9,6 +9,7 @@ import 'package:chat_app_custom/providers/users_page_provider.dart';
 
 //Resource
 import 'package:chat_app_custom/resource/app_colors.dart';
+import 'package:chat_app_custom/resource/app_strings.dart';
 
 //Widgets
 import 'package:chat_app_custom/widgets/top_bar.dart';
@@ -65,7 +66,7 @@ class _UsersPageState extends State<UsersPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TopBar(
-              'ユーザー',
+              AppStrings.usersPageTitle,
               primaryAction: IconButton(
                 onPressed: () {
                   _auth.logout();
@@ -81,7 +82,7 @@ class _UsersPageState extends State<UsersPage> {
                 _pageProvider.getUsers(name: _value);
                 FocusScope.of(context).unfocus();
               },
-              hintText: "ユーザーを探す",
+              hintText: AppStrings.searchInputHintText,
               obscureText: false,
               controller: _searchFieldTextEditingController,
               icon: Icons.search,
@@ -105,7 +106,8 @@ class _UsersPageState extends State<UsersPage> {
                 return CustomListViewTile(
                   height: _deviceHeight * 0.10,
                   title: _users[_index].name,
-                  subTitle: "Last Active: ${_users[_index].lastDayActive()}",
+                  subTitle: AppStrings.lastActiveText +
+                      _users[_index].lastDayActive(),
                   imagePath: _users[_index].imageURL,
                   isActive: _users[_index].wasRecentlyActive(),
                   isSelected: _pageProvider.selectedUsers.contains(
@@ -121,7 +123,7 @@ class _UsersPageState extends State<UsersPage> {
         } else {
           return Center(
             child: Text(
-              "そんな人はいません",
+              AppStrings.noFoundUsersText,
               style: TextStyle(
                 color: AppColors.white,
               ),
@@ -143,8 +145,8 @@ class _UsersPageState extends State<UsersPage> {
       visible: _pageProvider.selectedUsers.isNotEmpty,
       child: RoundedButton(
         name: _pageProvider.selectedUsers.length == 1
-            ? "${_pageProvider.selectedUsers.first.name}と話す"
-            : "グループを作成する",
+            ? _pageProvider.selectedUsers.first.name + AppStrings.talkWithText
+            : AppStrings.createGroup,
         height: _deviceHeight * 0.08,
         width: _deviceWidth * 0.80,
         onPressed: () {

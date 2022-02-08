@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 //Resource
 import 'package:chat_app_custom/resource/app_colors.dart';
+import 'package:chat_app_custom/resource/app_strings.dart';
 
 //Widgets
 import 'package:chat_app_custom/widgets/top_bar.dart';
@@ -142,7 +143,7 @@ class _ChatPageState extends State<ChatPage> {
         return Align(
           alignment: Alignment.center,
           child: Text(
-            "挨拶しよう",
+            AppStrings.encourageGreetingsText,
             style: TextStyle(color: AppColors.white),
           ),
         );
@@ -190,8 +191,8 @@ class _ChatPageState extends State<ChatPage> {
         onSaved: (_value) {
           _pageProvider.message = _value;
         },
-        regEx: r"^(?!\s*$).+",
-        hintText: "入力",
+        regEx: AppStrings.regExForMessage,
+        hintText: AppStrings.inputHintText,
         obsucureText: false,
       ),
     );
