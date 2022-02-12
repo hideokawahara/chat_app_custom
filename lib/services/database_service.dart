@@ -28,14 +28,22 @@ class DatabaseService {
   }
 
   Future<void> updateUser(
-      String _uid, String _email, String _name, String _imageURL) async {
+      String _uid, String _email, String _name, String? _imageURL) async {
     try {
-      await _db.collection(USER_COLLECTION).doc(_uid).update({
-        "email": _email,
-        "image": _imageURL,
-        "last_active": DateTime.now(),
-        "name": _name,
-      });
+      if (_imageURL != null) {
+        await _db.collection(USER_COLLECTION).doc(_uid).update({
+          "email": _email,
+          "image": _imageURL,
+          "last_active": DateTime.now(),
+          "name": _name,
+        });
+      } else {
+        await _db.collection(USER_COLLECTION).doc(_uid).update({
+          "email": _email,
+          "last_active": DateTime.now(),
+          "name": _name,
+        });
+      }
     } catch (e) {
       print(e);
     }

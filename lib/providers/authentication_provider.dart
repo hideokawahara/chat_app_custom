@@ -76,7 +76,7 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  Future<String?> update({
+  Future<String?> updateEmailAndName({
     required String name,
     required String email,
     required String password,

@@ -17,6 +17,8 @@ import 'package:chat_app_custom/services/cloud_storage_service.dart';
 import 'package:chat_app_custom/widgets/custom_input_fields.dart';
 import 'package:chat_app_custom/widgets/rounded_button.dart';
 import 'package:chat_app_custom/widgets/rounded_image.dart';
+import 'package:chat_app_custom/widgets/custom_dialog.dart';
+import 'package:chat_app_custom/widgets/custom_progress_indicator.dart';
 
 //Providers
 import 'package:chat_app_custom/providers/authentication_provider.dart';
@@ -126,9 +128,11 @@ class _MySettingsPageState extends State<MySettingsPage> {
   Widget _registerForm() {
     if (_nameEditingController.text.isEmpty) {
       _nameEditingController.text = _auth.user.name;
+      _name = _auth.user.name;
     }
     if (_emailEditingController.text.isEmpty) {
       _emailEditingController.text = _auth.user.email;
+      _email = _auth.user.email;
     }
     return Container(
       height: _deviceHeight * 0.35,
@@ -185,7 +189,7 @@ class _MySettingsPageState extends State<MySettingsPage> {
       width: _deviceWidth * 0.65,
       onPressed: () async {
         showProgressIndicator(context);
-        if (_updateFormKey.currentState!.validate() && _profileImage != null) {
+        if (_updateFormKey.currentState!.validate()) {
           _updateFormKey.currentState!.save();
           bool result = await _updateUserDataFunction();
           if (result) {
@@ -195,6 +199,9 @@ class _MySettingsPageState extends State<MySettingsPage> {
             Navigator.of(context).pop();
             showFailedDialog(context);
           }
+        } else {
+          print("failed");
+          Navigator.of(context).pop();
         }
       },
     );
@@ -202,11 +209,14 @@ class _MySettingsPageState extends State<MySettingsPage> {
 
   Future<bool> _updateUserDataFunction() async {
     try {
-      String? _uid = await _auth.update(
+      String? _uid = await _auth.updateEmailAndName(
           name: _name!, email: _email!, password: _password!);
-      String? _imageURL =
-          await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
-      await _db.updateUser(_uid, _email!, _name!, _imageURL!);
+      String? _imageURL;
+      if (_profileImage != null) {
+        _imageURL =
+            await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
+      }
+      await _db.updateUser(_uid!, _email!, _name!, _imageURL);
       _updateFormKey.currentState!.reset();
       await _auth.setChatUser();
       setState(() {
@@ -220,43 +230,4 @@ class _MySettingsPageState extends State<MySettingsPage> {
       return false;
     }
   }
-}
-
-void showProgressIndicator(BuildContext context) {
-  showGeneralDialog(
-    context: context,
-    barrierDismissible: false,
-    transitionDuration: Duration(milliseconds: 300),
-    barrierColor: Colors.black.withOpacity(0.5),
-    pageBuilder: (BuildContext context, Animation animation,
-        Animation secondaryAnimation) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    },
-  );
-}
-
-void showSuccessDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) {
-      return AlertDialog(
-        title: Text("更新できました"),
-        // content: Text("This is the content"),
-      );
-    },
-  );
-}
-
-void showFailedDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) {
-      return AlertDialog(
-        title: Text("更新失敗しました"),
-        // content: Text("This is the content"),
-      );
-    },
-  );
 }
