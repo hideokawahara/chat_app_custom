@@ -1,4 +1,5 @@
 //Packages
+import 'package:chat_app_custom/resource/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:file_picker/file_picker.dart';
@@ -26,19 +27,19 @@ class MySettingsPage extends StatefulWidget {
 }
 
 class _MySettingsPageState extends State<MySettingsPage> {
-  late final double _deviceHeight;
-  late final double _deviceWidth;
+  late double _deviceHeight;
+  late double _deviceWidth;
 
-  late final AuthenticationProvider _auth;
-  late final DatabaseService _db;
-  late final CloudStorageService _cloudStorage;
+  late AuthenticationProvider _auth;
+  late DatabaseService _db;
+  late CloudStorageService _cloudStorage;
 
   String? _email;
   String? _password;
   String? _name;
   PlatformFile? _profileImage;
 
-  final _registerFormKey = GlobalKey<FormState>();
+  final _updateFormKey = GlobalKey<FormState>();
 
   final TextEditingController _nameEditingController = TextEditingController();
   final TextEditingController _emailEditingController = TextEditingController();
@@ -81,7 +82,7 @@ class _MySettingsPageState extends State<MySettingsPage> {
             SizedBox(
               height: _deviceHeight * 0.05,
             ),
-            // _registerButton(),
+            _updateButton(),
             SizedBox(
               height: _deviceHeight * 0.02,
             ),
@@ -128,7 +129,7 @@ class _MySettingsPageState extends State<MySettingsPage> {
     return Container(
       height: _deviceHeight * 0.35,
       child: Form(
-        key: _registerFormKey,
+        key: _updateFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -157,41 +158,44 @@ class _MySettingsPageState extends State<MySettingsPage> {
               hintText: "Email",
               obsucureText: false,
             ),
-            CustomTextFormField(
-              onSaved: (_value) {
-                setState(() {
-                  _password = _value;
-                });
-              },
-              regEx: r".{8,}",
-              hintText: "Password",
-              obsucureText: true,
-            ),
+            // CustomTextFormField(
+            //   onSaved: (_value) {
+            //     setState(() {
+            //       _password = _value;
+            //     });
+            //   },
+            //   regEx: r".{8,}",
+            //   hintText: "Password",
+            //   obsucureText: true,
+            // ),
           ],
         ),
       ),
     );
   }
 
-  // Widget _registerButton() {
-  //   return RoundedButton(
-  //     name: "Register",
-  //     height: _deviceHeight * 0.065,
-  //     width: _deviceWidth * 0.65,
-  //     onPressed: () async {
-  //       if (_registerFormKey.currentState!.validate() &&
-  //           _profileImage != null) {
-  //         _registerFormKey.currentState!.save();
-  //         String? _uid = await _auth.registerUserUsingEmailAndPassword(
-  //             _email!, _password!);
-  //         String? _imageURL =
-  //             await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
-  //         await _db.createUser(_uid, _email!, _name!, _imageURL!);
-  //         await _auth.logout();
-  //         // _navigation.goBack();
-  //         await _auth.loginUsingEmailAndPassword(_email!, _password!);
-  //       }
-  //     },
-  //   );
-  // }
+  Widget _updateButton() {
+    return RoundedButton(
+      name: AppStrings.updateButton,
+      height: _deviceHeight * 0.065,
+      width: _deviceWidth * 0.65,
+      onPressed: () async {
+        print("press!");
+        if (_updateFormKey.currentState!.validate() && _profileImage != null) {
+          print("enter!");
+          _updateFormKey.currentState!.save();
+          String? _uid = await _auth.update(name: _name!, email: _email!);
+          String? _imageURL =
+              await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
+          await _db.updateUser(_uid, _email!, _name!, _imageURL!);
+
+          // await _auth.logout();
+          // _navigation.goBack();
+          // await _auth.loginUsingEmailAndPassword(_email!, _password!);
+          print("success");
+          // setState(() {});
+        }
+      },
+    );
+  }
 }

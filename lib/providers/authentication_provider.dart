@@ -75,6 +75,31 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
+  Future<String?> update({required String name, required String email}) async {
+    try {
+      print(_auth.currentUser?.uid);
+      print("try ${_auth.currentUser == null}, $name, $email");
+      await _auth.currentUser!.updateDisplayName(name);
+      AuthCredential _credential = EmailAuthProvider.credential(
+          email: _auth.currentUser!.email!, password: "testtest");
+      UserCredential? result =
+          await _auth.currentUser?.reauthenticateWithCredential(_credential);
+      if (result != null) {
+        await _auth.currentUser!.updateEmail(email);
+      }
+      // var credential = EmailAuthProvider.getCre
+      // await _auth.currentUser!.updateEmail(email);
+      print('wrong?');
+      print(
+          "success update your new name is ${_auth.currentUser?.displayName}, your new email is ${_auth.currentUser?.email}");
+      return _auth.currentUser!.uid;
+    } on FirebaseAuthException catch (e) {
+      print("Error update user, ${e.code}");
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> logout() async {
     try {
       await _auth.signOut();

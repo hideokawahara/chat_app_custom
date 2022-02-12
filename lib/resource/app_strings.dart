@@ -20,6 +20,7 @@ class AppStrings {
   static const String noFoundUsersText = "そんな人はいません";
   static const String talkWithText = "と話す";
   static const String createGroup = "グループを作成する";
+  static const String updateButton = "更新する";
 
   //common
   static const String isEmptyText = "";
