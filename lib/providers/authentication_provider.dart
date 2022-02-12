@@ -76,13 +76,17 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  Future<String?> update({required String name, required String email}) async {
+  Future<String?> update({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
     try {
       print(_auth.currentUser?.uid);
       print("try ${_auth.currentUser == null}, $name, $email");
       await _auth.currentUser!.updateDisplayName(name);
       AuthCredential _credential = EmailAuthProvider.credential(
-          email: _auth.currentUser!.email!, password: "testtest");
+          email: _auth.currentUser!.email!, password: password);
       UserCredential? result =
           await _auth.currentUser?.reauthenticateWithCredential(_credential);
       if (result != null) {
@@ -99,7 +103,7 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  void setChatUser() async {
+  Future<void> setChatUser() async {
     DocumentSnapshot _dbUser =
         await _databaseService.getUser(_auth.currentUser!.uid);
     Map<String, dynamic> _userData = _dbUser.data()! as Map<String, dynamic>;
@@ -113,6 +117,7 @@ class AuthenticationProvider extends ChangeNotifier {
       },
     );
     notifyListeners();
+    print("from provider ${user.name}, ${user.email}");
   }
 
   Future<void> logout() async {

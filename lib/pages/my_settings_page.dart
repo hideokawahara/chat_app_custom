@@ -162,16 +162,16 @@ class _MySettingsPageState extends State<MySettingsPage> {
               hintText: "Email",
               obsucureText: false,
             ),
-            // CustomTextFormField(
-            //   onSaved: (_value) {
-            //     setState(() {
-            //       _password = _value;
-            //     });
-            //   },
-            //   regEx: r".{8,}",
-            //   hintText: "Password",
-            //   obsucureText: true,
-            // ),
+            CustomTextFormField(
+              onSaved: (_value) {
+                setState(() {
+                  _password = _value;
+                });
+              },
+              regEx: r".{8,}",
+              hintText: "Password",
+              obsucureText: true,
+            ),
           ],
         ),
       ),
@@ -188,19 +188,22 @@ class _MySettingsPageState extends State<MySettingsPage> {
         if (_updateFormKey.currentState!.validate() && _profileImage != null) {
           print("enter!");
           _updateFormKey.currentState!.save();
-          String? _uid = await _auth.update(name: _name!, email: _email!);
+          String? _uid = await _auth.update(
+              name: _name!, email: _email!, password: _password!);
           String? _imageURL =
               await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
           await _db.updateUser(_uid, _email!, _name!, _imageURL!);
 
           print("success ${_auth.user.name}");
           _updateFormKey.currentState!.reset();
-          _auth.setChatUser();
+          await _auth.setChatUser();
+          print("from page ${_auth.user.name}, ${_auth.user.email}");
           setState(() {
             _profileImage = null;
             _nameEditingController.text = "";
             _emailEditingController.text = "";
           });
+          print("from page2 ${_auth.user.name}, ${_auth.user.email}");
         }
       },
     );

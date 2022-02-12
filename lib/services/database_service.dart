@@ -30,7 +30,7 @@ class DatabaseService {
   Future<void> updateUser(
       String _uid, String _email, String _name, String _imageURL) async {
     try {
-      await _db.collection(USER_COLLECTION).doc(_uid).set({
+      await _db.collection(USER_COLLECTION).doc(_uid).update({
         "email": _email,
         "image": _imageURL,
         "last_active": DateTime.now(),
