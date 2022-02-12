@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //Pages
 import 'package:chat_app_custom/pages/chats_page.dart';
 import 'package:chat_app_custom/pages/users_page.dart';
+import 'package:chat_app_custom/pages/my_settings_page.dart';
 
 //Resources
 import 'package:chat_app_custom/resource/app_colors.dart';
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     ChatsPage(),
     UsersPage(),
+    MySettingsPage(),
   ];
 
   @override
@@ -51,6 +53,12 @@ class _HomePageState extends State<HomePage> {
               Icons.supervised_user_circle_sharp,
             ),
           ),
+          BottomNavigationBarItem(
+            label: AppStrings.navigationTitleMySettings,
+            icon: Icon(
+              Icons.person,
+            ),
+          )
         ],
       ),
     );

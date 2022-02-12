@@ -27,6 +27,28 @@ class DatabaseService {
     }
   }
 
+  Future<void> updateUser(
+      String _uid, String _email, String _name, String? _imageURL) async {
+    try {
+      if (_imageURL != null) {
+        await _db.collection(USER_COLLECTION).doc(_uid).update({
+          "email": _email,
+          "image": _imageURL,
+          "last_active": DateTime.now(),
+          "name": _name,
+        });
+      } else {
+        await _db.collection(USER_COLLECTION).doc(_uid).update({
+          "email": _email,
+          "last_active": DateTime.now(),
+          "name": _name,
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<DocumentSnapshot> getUser(String _uid) {
     return _db.collection(USER_COLLECTION).doc(_uid).get();
   }

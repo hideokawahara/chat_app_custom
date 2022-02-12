@@ -8,17 +8,20 @@ class CustomTextFormField extends StatelessWidget {
   final String regEx;
   final String hintText;
   final bool obsucureText;
+  final TextEditingController? controller;
 
   CustomTextFormField({
     required this.onSaved,
     required this.regEx,
     required this.hintText,
     required this.obsucureText,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       onSaved: (_value) => onSaved(_value!),
       cursorColor: AppColors.white,
       style: TextStyle(color: AppColors.white),
