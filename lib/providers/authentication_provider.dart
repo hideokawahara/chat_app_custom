@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //Services
 import 'package:chat_app_custom/services/database_service.dart';
@@ -73,6 +74,44 @@ class AuthenticationProvider extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<String?> updateEmailAndName({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _auth.currentUser!.updateDisplayName(name);
+      AuthCredential _credential = EmailAuthProvider.credential(
+          email: _auth.currentUser!.email!, password: password);
+      UserCredential? result =
+          await _auth.currentUser?.reauthenticateWithCredential(_credential);
+      if (result != null) {
+        await _auth.currentUser!.updateEmail(email);
+      }
+      return _auth.currentUser!.uid;
+    } on FirebaseAuthException catch (e) {
+      print("Error update user, ${e.code}");
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setChatUser() async {
+    DocumentSnapshot _dbUser =
+        await _databaseService.getUser(_auth.currentUser!.uid);
+    Map<String, dynamic> _userData = _dbUser.data()! as Map<String, dynamic>;
+    user = ChatUser.fromJSON(
+      {
+        "uid": _auth.currentUser!.uid,
+        "name": _userData["name"],
+        "email": _userData["email"],
+        "last_active": _userData["last_active"],
+        "image": _userData["image"],
+      },
+    );
+    notifyListeners();
   }
 
   Future<void> logout() async {
