@@ -82,8 +82,6 @@ class AuthenticationProvider extends ChangeNotifier {
     required String password,
   }) async {
     try {
-      print(_auth.currentUser?.uid);
-      print("try ${_auth.currentUser == null}, $name, $email");
       await _auth.currentUser!.updateDisplayName(name);
       AuthCredential _credential = EmailAuthProvider.credential(
           email: _auth.currentUser!.email!, password: password);
@@ -92,9 +90,6 @@ class AuthenticationProvider extends ChangeNotifier {
       if (result != null) {
         await _auth.currentUser!.updateEmail(email);
       }
-      print('wrong?');
-      print(
-          "success update your new name is ${_auth.currentUser?.displayName}, your new email is ${_auth.currentUser?.email}");
       return _auth.currentUser!.uid;
     } on FirebaseAuthException catch (e) {
       print("Error update user, ${e.code}");
@@ -117,7 +112,6 @@ class AuthenticationProvider extends ChangeNotifier {
       },
     );
     notifyListeners();
-    print("from provider ${user.name}, ${user.email}");
   }
 
   Future<void> logout() async {

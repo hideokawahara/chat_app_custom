@@ -184,28 +184,79 @@ class _MySettingsPageState extends State<MySettingsPage> {
       height: _deviceHeight * 0.065,
       width: _deviceWidth * 0.65,
       onPressed: () async {
-        print("press!");
+        showProgressIndicator(context);
         if (_updateFormKey.currentState!.validate() && _profileImage != null) {
-          print("enter!");
           _updateFormKey.currentState!.save();
-          String? _uid = await _auth.update(
-              name: _name!, email: _email!, password: _password!);
-          String? _imageURL =
-              await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
-          await _db.updateUser(_uid, _email!, _name!, _imageURL!);
-
-          print("success ${_auth.user.name}");
-          _updateFormKey.currentState!.reset();
-          await _auth.setChatUser();
-          print("from page ${_auth.user.name}, ${_auth.user.email}");
-          setState(() {
-            _profileImage = null;
-            _nameEditingController.text = "";
-            _emailEditingController.text = "";
-          });
-          print("from page2 ${_auth.user.name}, ${_auth.user.email}");
+          bool result = await _updateUserDataFunction();
+          if (result) {
+            Navigator.of(context).pop();
+            showSuccessDialog(context);
+          } else {
+            Navigator.of(context).pop();
+            showFailedDialog(context);
+          }
         }
       },
     );
   }
+
+  Future<bool> _updateUserDataFunction() async {
+    try {
+      String? _uid = await _auth.update(
+          name: _name!, email: _email!, password: _password!);
+      String? _imageURL =
+          await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
+      await _db.updateUser(_uid, _email!, _name!, _imageURL!);
+      _updateFormKey.currentState!.reset();
+      await _auth.setChatUser();
+      setState(() {
+        _profileImage = null;
+        _nameEditingController.text = "";
+        _emailEditingController.text = "";
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+}
+
+void showProgressIndicator(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: false,
+    transitionDuration: Duration(milliseconds: 300),
+    barrierColor: Colors.black.withOpacity(0.5),
+    pageBuilder: (BuildContext context, Animation animation,
+        Animation secondaryAnimation) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    },
+  );
+}
+
+void showSuccessDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: Text("更新できました"),
+        // content: Text("This is the content"),
+      );
+    },
+  );
+}
+
+void showFailedDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: Text("更新失敗しました"),
+        // content: Text("This is the content"),
+      );
+    },
+  );
 }
