@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //Services
 import 'package:chat_app_custom/services/database_service.dart';
@@ -87,8 +88,6 @@ class AuthenticationProvider extends ChangeNotifier {
       if (result != null) {
         await _auth.currentUser!.updateEmail(email);
       }
-      // var credential = EmailAuthProvider.getCre
-      // await _auth.currentUser!.updateEmail(email);
       print('wrong?');
       print(
           "success update your new name is ${_auth.currentUser?.displayName}, your new email is ${_auth.currentUser?.email}");
@@ -98,6 +97,22 @@ class AuthenticationProvider extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
+
+  void setChatUser() async {
+    DocumentSnapshot _dbUser =
+        await _databaseService.getUser(_auth.currentUser!.uid);
+    Map<String, dynamic> _userData = _dbUser.data()! as Map<String, dynamic>;
+    user = ChatUser.fromJSON(
+      {
+        "uid": _auth.currentUser!.uid,
+        "name": _userData["name"],
+        "email": _userData["email"],
+        "last_active": _userData["last_active"],
+        "image": _userData["image"],
+      },
+    );
+    notifyListeners();
   }
 
   Future<void> logout() async {

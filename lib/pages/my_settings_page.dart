@@ -124,8 +124,12 @@ class _MySettingsPageState extends State<MySettingsPage> {
   }
 
   Widget _registerForm() {
-    _nameEditingController.text = _auth.user.name;
-    _emailEditingController.text = _auth.user.email;
+    if (_nameEditingController.text.isEmpty) {
+      _nameEditingController.text = _auth.user.name;
+    }
+    if (_emailEditingController.text.isEmpty) {
+      _emailEditingController.text = _auth.user.email;
+    }
     return Container(
       height: _deviceHeight * 0.35,
       child: Form(
@@ -189,11 +193,14 @@ class _MySettingsPageState extends State<MySettingsPage> {
               await _cloudStorage.saveUserImageToStorage(_uid!, _profileImage!);
           await _db.updateUser(_uid, _email!, _name!, _imageURL!);
 
-          // await _auth.logout();
-          // _navigation.goBack();
-          // await _auth.loginUsingEmailAndPassword(_email!, _password!);
-          print("success");
-          // setState(() {});
+          print("success ${_auth.user.name}");
+          _updateFormKey.currentState!.reset();
+          _auth.setChatUser();
+          setState(() {
+            _profileImage = null;
+            _nameEditingController.text = "";
+            _emailEditingController.text = "";
+          });
         }
       },
     );
