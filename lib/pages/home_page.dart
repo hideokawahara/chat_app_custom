@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           BottomNavigationBarItem(
-            label: "MySettings",
+            label: AppStrings.navigationTitleMySettings,
             icon: Icon(
               Icons.person,
             ),

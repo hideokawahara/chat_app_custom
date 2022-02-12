@@ -2,6 +2,7 @@ class AppStrings {
   //HomePage
   static const String navigationTitleChats = "会話";
   static const String navigationTitleUsers = "友達";
+  static const String navigationTitleMySettings = "マイページ";
 
   //ChatsPage
   static const String chatsPageTitle = "メッセージ";
@@ -21,6 +22,16 @@ class AppStrings {
   static const String talkWithText = "と話す";
   static const String createGroup = "グループを作成する";
   static const String updateButton = "更新する";
+
+  //MySettingsPage
+  static const String mySettingsPageTitle = "マイページ";
+  static const String regExForName = r".{8,}";
+  static const String nameInputHintText = "名前を入力しよう";
+  static const String regExForEmail =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  static const String emailInputHintText = "メアドを入力しよう";
+  static const String regExForPassword = r".{8,}";
+  static const String passwordInputHintText = "更新のためにパスワードを入力してください";
 
   //common
   static const String isEmptyText = "";

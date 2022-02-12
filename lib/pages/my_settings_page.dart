@@ -61,7 +61,7 @@ class _MySettingsPageState extends State<MySettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColorTeal,
-        title: Text("マイページ"),
+        title: Text(AppStrings.mySettingsPageTitle),
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -150,8 +150,8 @@ class _MySettingsPageState extends State<MySettingsPage> {
                   _name = _value;
                 });
               },
-              regEx: r".{8,}",
-              hintText: "Name",
+              regEx: AppStrings.regExForName,
+              hintText: AppStrings.nameInputHintText,
               obsucureText: false,
             ),
             CustomTextFormField(
@@ -161,9 +161,8 @@ class _MySettingsPageState extends State<MySettingsPage> {
                   _email = _value;
                 });
               },
-              regEx:
-                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-              hintText: "Email",
+              regEx: AppStrings.regExForEmail,
+              hintText: AppStrings.emailInputHintText,
               obsucureText: false,
             ),
             CustomTextFormField(
@@ -172,8 +171,8 @@ class _MySettingsPageState extends State<MySettingsPage> {
                   _password = _value;
                 });
               },
-              regEx: r".{8,}",
-              hintText: "Password",
+              regEx: AppStrings.regExForPassword,
+              hintText: AppStrings.passwordInputHintText,
               obsucureText: true,
             ),
           ],
@@ -221,8 +220,8 @@ class _MySettingsPageState extends State<MySettingsPage> {
       await _auth.setChatUser();
       setState(() {
         _profileImage = null;
-        _nameEditingController.text = "";
-        _emailEditingController.text = "";
+        _nameEditingController.text = AppStrings.isEmptyText;
+        _emailEditingController.text = AppStrings.isEmptyText;
       });
       return true;
     } catch (e) {
