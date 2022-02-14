@@ -10,9 +10,9 @@ import 'package:chat_app_custom/providers/users_page_provider.dart';
 //Resource
 import 'package:chat_app_custom/resource/app_colors.dart';
 import 'package:chat_app_custom/resource/app_strings.dart';
+import 'package:chat_app_custom/resource/app_styles.dart';
 
 //Widgets
-import 'package:chat_app_custom/widgets/top_bar.dart';
 import 'package:chat_app_custom/widgets/custom_input_fields.dart';
 import 'package:chat_app_custom/widgets/custom_list_view_tiles.dart';
 import 'package:chat_app_custom/widgets/rounded_button.dart';
@@ -53,43 +53,52 @@ class _UsersPageState extends State<UsersPage> {
   Widget _buildUI() {
     return Builder(builder: (BuildContext _context) {
       _pageProvider = _context.watch<UsersPageProvider>();
-      return Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: _deviceWidth * 0.03,
-          vertical: _deviceHeight * 0.02,
-        ),
-        height: _deviceHeight * 0.98,
-        width: _deviceWidth * 0.97,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TopBar(
-              AppStrings.usersPageTitle,
-              primaryAction: IconButton(
-                onPressed: () {
-                  _auth.logout();
-                },
-                icon: Icon(
-                  Icons.logout,
-                  color: AppColors.white,
-                ),
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.mainColorTeal,
+          title: Text(
+            AppStrings.usersPageTitle,
+            style: AppStyles.appBarTitleStyle,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                _auth.logout();
+              },
+              icon: Icon(
+                Icons.logout,
+                color: AppColors.white,
               ),
             ),
-            CustomTextField(
-              onEditingComplete: (_value) {
-                _pageProvider.getUsers(name: _value);
-                FocusScope.of(context).unfocus();
-              },
-              hintText: AppStrings.searchInputHintText,
-              obscureText: false,
-              controller: _searchFieldTextEditingController,
-              icon: Icons.search,
-            ),
-            _usersList(),
-            _createChatButton(),
           ],
+        ),
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: _deviceWidth * 0.03,
+            vertical: _deviceHeight * 0.02,
+          ),
+          height: _deviceHeight * 0.98,
+          width: _deviceWidth * 0.97,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomTextField(
+                onEditingComplete: (_value) {
+                  _pageProvider.getUsers(name: _value);
+                  FocusScope.of(context).unfocus();
+                },
+                hintText: AppStrings.searchInputHintText,
+                obscureText: false,
+                controller: _searchFieldTextEditingController,
+                icon: Icons.search,
+              ),
+              _usersList(),
+              _createChatButton(),
+            ],
+          ),
         ),
       );
     });
