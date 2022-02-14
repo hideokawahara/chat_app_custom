@@ -5,7 +5,7 @@ class AppColors {
   static const hintTextGrey = Colors.white54;
   static const mainTextColor = Colors.black;
   static const mainColorTeal = Colors.teal;
-  static const mainScaffoldBackGroundColor = Colors.white54;
+  static const mainScaffoldBackGroundColor = Colors.white30;
   static const listSubTitleGrey = Colors.white54;
   static const sentMessageTimeGrey = Colors.white70;
   static const messageBubbleOpponentColor = [

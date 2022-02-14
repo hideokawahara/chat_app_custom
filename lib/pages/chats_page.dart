@@ -10,6 +10,7 @@ import 'package:chat_app_custom/providers/chats_page_provider.dart';
 //Resource
 import 'package:chat_app_custom/resource/app_colors.dart';
 import 'package:chat_app_custom/resource/app_strings.dart';
+import 'package:chat_app_custom/resource/app_styles.dart';
 
 //Services
 import 'package:chat_app_custom/services/navigation_service.dart';
@@ -61,32 +62,40 @@ class _ChatsPageState extends State<ChatsPage> {
   Widget _buildUI() {
     return Builder(builder: (BuildContext _context) {
       _pageProvider = _context.watch<ChatsPageProvider>();
-      return Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: _deviceWidth * 0.03,
-          vertical: _deviceHeight * 0.02,
-        ),
-        height: _deviceHeight * 0.98,
-        width: _deviceWidth * 0.97,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TopBar(
-              AppStrings.chatsPageTitle,
-              primaryAction: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: AppColors.white,
-                ),
-                onPressed: () {
-                  _auth.logout();
-                },
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.mainColorTeal,
+          title: Text(
+            AppStrings.chatsPageTitle,
+            style: AppStyles.appBarTitleStyle,
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                _auth.logout();
+              },
+              icon: Icon(
+                Icons.logout,
+                color: AppColors.white,
               ),
             ),
-            _chatsList(),
           ],
+        ),
+        body: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: _deviceWidth * 0.03,
+            vertical: _deviceHeight * 0.02,
+          ),
+          height: _deviceHeight * 0.98,
+          width: _deviceWidth * 0.97,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _chatsList(),
+            ],
+          ),
         ),
       );
     });

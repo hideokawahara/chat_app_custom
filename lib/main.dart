@@ -41,9 +41,8 @@ class MainApp extends StatelessWidget {
         })
       ],
       child: MaterialApp(
-        title: 'Chatify',
+        title: 'ChatAppCustom',
         theme: ThemeData(
-          // backgroundColor: Color.fromRGBO(36, 35, 49, 1.0),
           scaffoldBackgroundColor: AppColors.mainScaffoldBackGroundColor,
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: AppColors.mainColorTeal,

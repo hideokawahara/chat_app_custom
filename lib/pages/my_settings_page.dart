@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 //Resources
 import 'package:chat_app_custom/resource/app_colors.dart';
+import 'package:chat_app_custom/resource/app_styles.dart';
 
 //Services
 import 'package:chat_app_custom/services/media_service.dart';
@@ -61,7 +62,10 @@ class _MySettingsPageState extends State<MySettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColorTeal,
-        title: Text(AppStrings.mySettingsPageTitle),
+        title: Text(
+          AppStrings.mySettingsPageTitle,
+          style: AppStyles.appBarTitleStyle,
+        ),
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
