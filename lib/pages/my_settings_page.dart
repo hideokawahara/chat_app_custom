@@ -66,6 +66,17 @@ class _MySettingsPageState extends State<MySettingsPage> {
           AppStrings.mySettingsPageTitle,
           style: AppStyles.appBarTitleStyle,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              _auth.logout();
+            },
+            icon: Icon(
+              Icons.logout,
+              color: AppColors.white,
+            ),
+          ),
+        ],
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
