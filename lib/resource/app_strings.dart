@@ -1,4 +1,7 @@
 class AppStrings {
+  //LoginPage
+  static const String appTitle = "チャットアプリ";
+
   //HomePage
   static const String navigationTitleChats = "会話";
   static const String navigationTitleUsers = "友達";
