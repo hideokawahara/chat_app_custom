@@ -1,5 +1,6 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 //Pages
 import 'package:chat_app_custom/pages/chats_page.dart';
@@ -16,7 +17,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
+  final List<BottomNavigationBarItem> _tabItems = [
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleChats,
+      icon: Icon(
+        Icons.chat_bubble_sharp,
+      ),
+    ),
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleUsers,
+      icon: Icon(
+        Icons.supervised_user_circle_sharp,
+      ),
+    ),
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleMySettings,
+      icon: Icon(
+        Icons.person,
+      ),
+    ),
+  ];
+
   final List<Widget> _pages = [
     ChatsPage(),
     UsersPage(),
@@ -29,38 +50,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildUI() {
-    return Scaffold(
-      body: _pages[_currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppColors.white,
-        unselectedItemColor: AppColors.unSelectedGrey,
-        currentIndex: _currentPage,
-        onTap: (_index) {
-          setState(() {
-            _currentPage = _index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleChats,
-            icon: Icon(
-              Icons.chat_bubble_sharp,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleUsers,
-            icon: Icon(
-              Icons.supervised_user_circle_sharp,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleMySettings,
-            icon: Icon(
-              Icons.person,
-            ),
-          )
-        ],
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        items: _tabItems,
+        activeColor: AppColors.white,
+        inactiveColor: AppColors.unSelectedGrey,
+        backgroundColor: AppColors.mainColorTeal,
       ),
+      tabBuilder: (context, index) {
+        return CupertinoTabView(builder: (context) {
+          return _pages[index];
+        });
+      },
     );
   }
 }
