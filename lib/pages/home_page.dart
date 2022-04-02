@@ -11,6 +11,9 @@ import 'package:chat_app_custom/pages/my_settings_page.dart';
 import 'package:chat_app_custom/resource/app_colors.dart';
 import 'package:chat_app_custom/resource/app_strings.dart';
 
+//Widgets
+import 'custom_cupertino_tab_bar.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -51,11 +54,22 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildUI() {
     return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
+      tabBar: CustomCupertinoTabBar(
         items: _tabItems,
         activeColor: AppColors.white,
         inactiveColor: AppColors.unSelectedGrey,
         backgroundColor: AppColors.mainColorTeal,
+        height: 80,
+        labelStyle: TextStyle(
+          color: AppColors.unSelectedGrey,
+          fontWeight: FontWeight.normal,
+          fontSize: 12,
+        ),
+        activeLabelStyle: TextStyle(
+          color: AppColors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+        ),
       ),
       tabBuilder: (context, index) {
         return CupertinoTabView(builder: (context) {
