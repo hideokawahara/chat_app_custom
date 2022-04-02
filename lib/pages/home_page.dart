@@ -1,5 +1,6 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 //Pages
 import 'package:chat_app_custom/pages/chats_page.dart';
@@ -10,13 +11,36 @@ import 'package:chat_app_custom/pages/my_settings_page.dart';
 import 'package:chat_app_custom/resource/app_colors.dart';
 import 'package:chat_app_custom/resource/app_strings.dart';
 
+//Widgets
+import 'custom_cupertino_tab_bar.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
+  final List<BottomNavigationBarItem> _tabItems = [
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleChats,
+      icon: Icon(
+        Icons.chat_bubble_sharp,
+      ),
+    ),
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleUsers,
+      icon: Icon(
+        Icons.supervised_user_circle_sharp,
+      ),
+    ),
+    BottomNavigationBarItem(
+      label: AppStrings.navigationTitleMySettings,
+      icon: Icon(
+        Icons.person,
+      ),
+    ),
+  ];
+
   final List<Widget> _pages = [
     ChatsPage(),
     UsersPage(),
@@ -29,38 +53,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildUI() {
-    return Scaffold(
-      body: _pages[_currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppColors.white,
-        unselectedItemColor: AppColors.unSelectedGrey,
-        currentIndex: _currentPage,
-        onTap: (_index) {
-          setState(() {
-            _currentPage = _index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleChats,
-            icon: Icon(
-              Icons.chat_bubble_sharp,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleUsers,
-            icon: Icon(
-              Icons.supervised_user_circle_sharp,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: AppStrings.navigationTitleMySettings,
-            icon: Icon(
-              Icons.person,
-            ),
-          )
-        ],
+    return CupertinoTabScaffold(
+      tabBar: CustomCupertinoTabBar(
+        items: _tabItems,
+        activeColor: AppColors.white,
+        inactiveColor: AppColors.unSelectedGrey,
+        backgroundColor: AppColors.mainColorTeal,
+        height: 80,
+        labelStyle: TextStyle(
+          color: AppColors.unSelectedGrey,
+          fontWeight: FontWeight.normal,
+          fontSize: 12,
+        ),
+        activeLabelStyle: TextStyle(
+          color: AppColors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+        ),
       ),
+      tabBuilder: (context, index) {
+        return CupertinoTabView(builder: (context) {
+          return _pages[index];
+        });
+      },
     );
   }
 }
