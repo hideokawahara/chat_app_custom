@@ -47,6 +47,21 @@ class _HomePageState extends State<HomePage> {
     MySettingsPage(),
   ];
 
+  final List<GlobalKey<NavigatorState>> _tabNavKeyList =
+      List.generate(3, (index) => index)
+          .map((_) => GlobalKey<NavigatorState>())
+          .toList();
+
+  final CupertinoTabController _controller = CupertinoTabController();
+
+  int _previousIndex = 0;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _buildUI();
@@ -54,12 +69,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildUI() {
     return CupertinoTabScaffold(
+      controller: _controller,
       tabBar: CustomCupertinoTabBar(
         items: _tabItems,
         activeColor: AppColors.white,
         inactiveColor: AppColors.unSelectedGrey,
         backgroundColor: AppColors.mainColorTeal,
-        height: 80,
+        height: 66,
         labelStyle: TextStyle(
           color: AppColors.unSelectedGrey,
           fontWeight: FontWeight.normal,
@@ -70,12 +86,26 @@ class _HomePageState extends State<HomePage> {
           fontWeight: FontWeight.bold,
           fontSize: 14,
         ),
+        onTap: (index) => _onTapItem(context, index),
       ),
       tabBuilder: (context, index) {
-        return CupertinoTabView(builder: (context) {
-          return _pages[index];
-        });
+        return CupertinoTabView(
+            navigatorKey: _tabNavKeyList[index],
+            builder: (context) {
+              return _pages[index];
+            });
       },
     );
+  }
+
+  void _onTapItem(BuildContext context, int index) {
+    if (index != _previousIndex) {
+      _previousIndex = index;
+      return;
+    }
+
+    _tabNavKeyList[_controller.index]
+        .currentState
+        ?.popUntil((route) => route.isFirst);
   }
 }
