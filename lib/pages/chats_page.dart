@@ -28,8 +28,18 @@ import 'package:chat_app_custom/models/chat_user.dart';
 import 'package:chat_app_custom/models/chat_message.dart';
 
 class ChatsPage extends StatefulWidget {
+  final ScrollController _controller = ScrollController();
+
   @override
   _ChatsPageState createState() => _ChatsPageState();
+
+  void scrollToTop() {
+    _controller.animateTo(
+      0,
+      duration: Duration(seconds: 1),
+      curve: Curves.linear,
+    );
+  }
 }
 
 class _ChatsPageState extends State<ChatsPage> {
@@ -109,6 +119,7 @@ class _ChatsPageState extends State<ChatsPage> {
         if (_chats != null) {
           if (_chats.length != 0) {
             return ListView.builder(
+                controller: widget._controller,
                 itemCount: _chats.length,
                 itemBuilder: (BuildContext _context, int _index) {
                   return _chatTile(

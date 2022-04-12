@@ -21,8 +21,18 @@ import 'package:chat_app_custom/widgets/rounded_button.dart';
 import 'package:chat_app_custom/models/chat_user.dart';
 
 class UsersPage extends StatefulWidget {
+  final ScrollController _controller = ScrollController();
+
   @override
   _UsersPageState createState() => _UsersPageState();
+
+  void scrollToTop() {
+    _controller.animateTo(
+      0,
+      duration: Duration(seconds: 1),
+      curve: Curves.linear,
+    );
+  }
 }
 
 class _UsersPageState extends State<UsersPage> {
@@ -110,6 +120,7 @@ class _UsersPageState extends State<UsersPage> {
       if (_users != null) {
         if (_users.length != 0) {
           return ListView.builder(
+              controller: widget._controller,
               itemCount: _users.length,
               itemBuilder: (BuildContext _context, int _index) {
                 return CustomListViewTile(
