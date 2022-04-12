@@ -104,6 +104,19 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
+    if (_tabNavKeyList[_controller.index].currentState != null &&
+        !_tabNavKeyList[_controller.index].currentState!.canPop()) {
+      if (_pages[index] is ChatsPage) {
+        ChatsPage setChatsPage = _pages[index] as ChatsPage;
+        setChatsPage.scrollToTop();
+      } else if (_pages[index] is UsersPage) {
+        UsersPage setUsersPage = _pages[index] as UsersPage;
+        setUsersPage.scrollToTop();
+      } else if (_pages[index] is MySettingsPage) {
+        MySettingsPage setMySettingsPage = _pages[index] as MySettingsPage;
+      }
+    }
+
     _tabNavKeyList[_controller.index]
         .currentState
         ?.popUntil((route) => route.isFirst);
